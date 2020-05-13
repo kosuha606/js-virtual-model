@@ -1,0 +1,26 @@
+{
+  "name": "js-virtual-model",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kosuha606/js-virtual-model.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kosuha606/js-virtual-model/issues"
+  },
+  "homepage": "https://github.com/kosuha606/js-virtual-model#readme",
+  "dependencies": {
+    "babel-loader": "^8.1.0",
+    "jsface": "^2.4.9"
+  },
+  "devDependencies": {
+    "js-unit": "^1.1.3"
+  }
+}
