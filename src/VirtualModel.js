@@ -1,31 +1,16 @@
 import VirtualModelProvider from "./VirtualModelProvider";
+import VirtualModelManager from "./VirtualModelManager";
 
 export default class VirtualModel
 {
+    static type()
+    {
+        return 'virtual';
+    }
+
     constructor()
     {
-        this.isNewRecord = true;
-        this.attributes = [];
-    }
-
-    static one()
-    {
-
-    }
-
-    static many()
-    {
-
-    }
-
-    static create()
-    {
-
-    }
-
-    static createMany()
-    {
-
+        this.attributes = {};
     }
 
     getAttributes()
@@ -46,6 +31,15 @@ export default class VirtualModel
 
             this.attributes[key] = attributes[key];
         }
+    }
+
+    static call(method, args)
+    {
+        return VirtualModelManager.getProvider(VirtualModel.providerType())[method].call(
+            2,
+            VirtualModel.type(),
+            args
+        );
     }
 
     static providerType()

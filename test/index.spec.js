@@ -1,17 +1,19 @@
 import { expect } from "chai"
-import sayHello from "../src/index"
 import VirtualModel from "../src/VirtualModel"
+import VirtualModelManager from "../src/VirtualModelManager";
+import MemoryModelProvider from "../src/Examples/MemoryModelProvider";
+import Product from "../src/Examples/Product";
+
 
 describe("index test", () => {
-    describe("sayHello function", () => {
-        let vm = new VirtualModel();
+    describe("VirtualModel", () => {
+        it("storage type", () => {
+            let memoryProvider = new MemoryModelProvider();
+            VirtualModelManager.addProvider(memoryProvider);
 
-        expect(VirtualModel.providerType()).to.equal('storage');
+            expect(VirtualModel.providerType()).to.equal('storage');
 
-        it("should say Hello guys!", () => {
-
-            const str = sayHello();
-            expect(str).to.equal("Hello guys!")
+            let products = Product.call('many', {});
         })
     })
 })
