@@ -1,4 +1,8 @@
 
-export default class VirtualModelProvider {
-
+export default class VirtualModelProvider
+{
+    static defaultProviderType()
+    {
+        return 'storage';
+    }
 }

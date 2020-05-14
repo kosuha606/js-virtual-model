@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha --watch --require @babel/register",
+    "start": "nodemon --exec babel-node ./src/index.js"
   },
   "repository": {
     "type": "git",
@@ -16,11 +17,15 @@
     "url": "https://github.com/kosuha606/js-virtual-model/issues"
   },
   "homepage": "https://github.com/kosuha606/js-virtual-model#readme",
-  "dependencies": {
-    "babel-loader": "^8.1.0",
-    "jsface": "^2.4.9"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "js-unit": "^1.1.3"
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/register": "^7.9.0",
+    "chai": "^4.2.0",
+    "mocha": "^7.1.2",
+    "nodemon": "^2.0.4"
   }
 }
