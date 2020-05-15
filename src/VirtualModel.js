@@ -1,7 +1,7 @@
 import VirtualModelProvider from "./VirtualModelProvider";
 import VirtualModelManager from "./VirtualModelManager";
 
-let workInstance = null;
+let workInstances = {};
 
 export default class VirtualModel
 {
@@ -32,11 +32,11 @@ export default class VirtualModel
     }
 
     static call(method, args) {
-        if (!workInstance) {
-            workInstance = new this();
+        if (!workInstances[this.name]) {
+            workInstances[this.name] = new this();
         }
 
-        return workInstance.call(method, args);
+        return workInstances[this.name].call(method, args);
     }
 
     call(method, args) {
@@ -46,7 +46,7 @@ export default class VirtualModel
             provider,
             this.constructor.name,
             args,
-            workInstance
+            workInstances[this.constructor.name]
         );
     }
 

@@ -18,12 +18,8 @@ export default class MemoryModelProvider extends VirtualModelProvider
     many(modelClass, config, workInstance)
     {
         let result = [];
-
-        if (!this.memoryStorage[modelClass]) {
-            throw new Error('No data for type '+modelClass+' in memory provider');
-        }
-
         let attrs;
+        this.ensureHaveModel(modelClass);
 
         for (var key in this.memoryStorage[modelClass]) {
             if (!this.memoryStorage[modelClass].hasOwnProperty(key)) {
@@ -35,5 +31,18 @@ export default class MemoryModelProvider extends VirtualModelProvider
         }
 
         return result;
+    }
+
+    save(modelClass, model, workInstance)
+    {
+        this.ensureHaveModel(modelClass);
+        this.memoryStorage[modelClass].push(model.getAttributes());
+    }
+
+    ensureHaveModel(modelClass)
+    {
+        if (!this.memoryStorage[modelClass]) {
+            throw new Error('No data for type '+modelClass+' in memory provider');
+        }
     }
 }
