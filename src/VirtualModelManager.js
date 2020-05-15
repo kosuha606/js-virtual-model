@@ -4,8 +4,7 @@ export default
 {
     providers: {},
 
-    getProvider(type = null)
-    {
+    getProvider(type = null) {
         if (!type) {
             type = VirtualModelProvider.defaultProviderType();
         }
@@ -17,8 +16,7 @@ export default
         return this.providers[type];
     },
 
-    addProvider(provider)
-    {
+    addProvider(provider) {
         if (!typeof provider === VirtualModelProvider) {
             throw new Error('Only virtual providers can be set to virtual manager');
         }

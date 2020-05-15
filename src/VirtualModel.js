@@ -1,25 +1,23 @@
 import VirtualModelProvider from "./VirtualModelProvider";
 import VirtualModelManager from "./VirtualModelManager";
 
+let workInstance = null;
+
 export default class VirtualModel
 {
-    static type()
-    {
+    static type() {
         return 'virtual';
     }
 
-    constructor()
-    {
+    constructor() {
         this.attributes = {};
     }
 
-    getAttributes()
-    {
+    getAttributes() {
         return this.attributes;
     }
 
-    setAttributes(attributes)
-    {
+    setAttributes(attributes) {
         if (!attributes) {
             return;
         }
@@ -33,17 +31,33 @@ export default class VirtualModel
         }
     }
 
-    static call(method, args)
-    {
-        return VirtualModelManager.getProvider(VirtualModel.providerType())[method].call(
-            2,
-            VirtualModel.type(),
-            args
+    static call(method, args) {
+        if (!workInstance) {
+            workInstance = new this();
+        }
+
+        return workInstance.call(method, args);
+    }
+
+    call(method, args) {
+        let provider = VirtualModelManager.getProvider(this.constructor.providerType());
+
+        return provider[method].call(
+            provider,
+            this.constructor.name,
+            args,
+            workInstance
         );
     }
 
-    static providerType()
-    {
+    buildModel(attrs) {
+        let model = new this.constructor();
+        model.setAttributes(attrs);
+
+        return model;
+    }
+
+    static providerType() {
         return VirtualModelProvider.defaultProviderType();
     }
 }

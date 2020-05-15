@@ -1,13 +1,11 @@
 
 export default class VirtualModelProvider
 {
-    type()
-    {
+    type() {
         return VirtualModelProvider.defaultProviderType();
     }
 
-    static defaultProviderType()
-    {
+    static defaultProviderType() {
         return 'storage';
     }
 }
