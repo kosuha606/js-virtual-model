@@ -35,7 +35,10 @@ export default class MemoryModelProvider extends VirtualModelProvider
 
     save(modelClass, model, workInstance)
     {
-        this.ensureHaveModel(modelClass);
+        if (!this.memoryStorage[modelClass]) {
+            this.memoryStorage[modelClass] = [];
+        }
+
         this.memoryStorage[modelClass].push(model.getAttributes());
     }
 
