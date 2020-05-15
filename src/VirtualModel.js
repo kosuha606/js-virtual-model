@@ -42,6 +42,10 @@ export default class VirtualModel
     call(method, args) {
         let provider = VirtualModelManager.getProvider(this.constructor.providerType());
 
+        if (!args) {
+            args = this;
+        }
+
         return provider[method].call(
             provider,
             this.constructor.name,

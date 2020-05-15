@@ -61,7 +61,7 @@ describe("index test", () => {
                 description: 'New',
             });
 
-            Product.call('save', product);
+            product.call('save');
 
             let products = Product.call('many', {});
             expect(products.length).to.equal(2);
