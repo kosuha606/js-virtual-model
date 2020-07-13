@@ -3,6 +3,8 @@ import VirtualModelManager from "./VirtualModelManager";
 
 let workInstances = {};
 
+const modelManager = window.VirtualModelManager ? window.VirtualModelManager : VirtualModelManager;
+
 export default class VirtualModel
 {
     static type() {
@@ -40,7 +42,7 @@ export default class VirtualModel
     }
 
     call(method, args) {
-        let provider = VirtualModelManager.getProvider(this.constructor.providerType());
+        let provider = modelManager.getProvider(this.constructor.providerType());
 
         if (!args) {
             args = this;
