@@ -3,7 +3,7 @@ import VirtualModelManager from "./VirtualModelManager";
 
 let workInstances = {};
 
-const modelManager = window.VirtualModelManager ? window.VirtualModelManager : VirtualModelManager;
+const modelManager = (typeof(window) !== 'undefined' && window.VirtualModelManager) ? window.VirtualModelManager : VirtualModelManager;
 
 export default class VirtualModel
 {
