@@ -11,6 +11,10 @@ export default class VirtualModel
         return 'virtual';
     }
 
+    static className() {
+        return 'VirtualModel';
+    }
+
     constructor() {
         this.attributes = {};
     }
@@ -34,11 +38,11 @@ export default class VirtualModel
     }
 
     static call(method, args) {
-        if (!workInstances[this.name]) {
-            workInstances[this.name] = new this();
+        if (!workInstances[this.className()]) {
+            workInstances[this.className()] = new this();
         }
 
-        return workInstances[this.name].call(method, args);
+        return workInstances[this.className()].call(method, args);
     }
 
     call(method, args) {
@@ -50,9 +54,9 @@ export default class VirtualModel
 
         return provider[method].call(
             provider,
-            this.constructor.name,
+            this.constructor.className(),
             args,
-            workInstances[this.constructor.name]
+            workInstances[this.constructor.className()]
         );
     }
 
