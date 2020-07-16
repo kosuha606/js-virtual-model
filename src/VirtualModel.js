@@ -56,7 +56,7 @@ export default class VirtualModel
             provider,
             this.constructor.className(),
             args,
-            workInstances[this.constructor.className()]
+            this ? this : workInstances[this.constructor.className()]
         );
     }
 
