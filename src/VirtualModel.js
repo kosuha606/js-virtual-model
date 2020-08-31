@@ -3,10 +3,7 @@ import VirtualModelManager from "./VirtualModelManager";
 
 let workInstances = {};
 
-const modelManager = (typeof(window) !== 'undefined' && window.VirtualModelManager) ? window.VirtualModelManager : VirtualModelManager;
-
-export default class VirtualModel
-{
+export default class VirtualModel {
     static type() {
         return 'virtual';
     }
@@ -46,7 +43,7 @@ export default class VirtualModel
     }
 
     call(method, args) {
-        let provider = modelManager.getProvider(this.constructor.providerType());
+        let provider = VirtualModelManager.getProvider(this.constructor.providerType());
 
         if (!args) {
             args = this;
@@ -65,6 +62,10 @@ export default class VirtualModel
         model.setAttributes(attrs);
 
         return model;
+    }
+
+    getProvider() {
+        return VirtualModelManager.getProvider(this.constructor.providerType());
     }
 
     static providerType() {
